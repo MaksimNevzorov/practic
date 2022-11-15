@@ -1,4 +1,5 @@
 import { Component } from "./Component/Component.js";
+import './Button.js'
 
 export class App extends Component {
     constructor() {
@@ -27,22 +28,14 @@ export class App extends Component {
         })
     }    
     
-    
-    onClick(evt) {
-        if(evt.target.closest('.plus')){
-            this.increaseCount()
-        }
-        if(evt.target.closest('.minus')){
-            this.decreaseCount()
-        }
-    }
-    
     componentDidMount(){
-        this.addEventListener('click', this.onClick)
+        this.addEventListener('increase', this.increaseCount)
+        this.addEventListener('decrease', this.decreaseCount)
     }    
     
     componentWillUnmount(){
-        this.removeEventListener('click', this.onClick)
+        this.removeEventListener('increase', this.increaseCount)
+        this.removeEventListener('decrease', this.decreaseCount)
     }
     
     static get observedAttributes () {
@@ -52,9 +45,9 @@ export class App extends Component {
     
     render() {
         return `
-        <button type="button" class="btn btn-info plus">+</button>
+        <my-button eventtype="increase" content="+"></my-button>
         <span>${this.state.count}</span>
-        <button type="button" class="btn btn-info minus">-</button>
+        <my-button eventtype="decrease" content="-"></my-button>
         `
     }
 }

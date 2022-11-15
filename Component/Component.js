@@ -8,7 +8,7 @@ export class Component extends HTMLElement {
     
     setState(callback) {
         this.state = callback(this.state);
-        this.innerHTML = this.render()
+        this.innerHTML = this.render();
     }
     
     connectedCallback() {
@@ -17,7 +17,7 @@ export class Component extends HTMLElement {
     }
     
     disconnectedCallback(){
-        this.componentWillUnmount()
+        this.componentWillUnmount();
     }
     
     attributeChangedCallback(name, oldValue, newValue) {
@@ -27,6 +27,9 @@ export class Component extends HTMLElement {
         })
     }
     
+    dispatch(type, props) {
+        this.dispatchEvent(new CustomEvent(type, {bubbles: true, detail: props}))
+    }
     
     
     render() {}
